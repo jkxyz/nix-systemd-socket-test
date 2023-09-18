@@ -19,10 +19,10 @@
             virtualisation.forwardPorts = [{
               from = "host";
               host.port = 3000;
-              guest.port = 3000;
+              guest.port = 80;
             }];
 
-            networking.firewall.allowedTCPPorts = [ 3000 ];
+            networking.firewall.allowedTCPPorts = [ 80 ];
 
             users.mutableUsers = false;
             users.users.root.password = "";
@@ -35,6 +35,14 @@
                 ExecStart =
                   "${pkgs.nodejs}/bin/node ${self.packages.x86_64-linux.server}/lib/node_modules/server/main.js";
                 Restart = "on-failure";
+              };
+            };
+
+            services.nginx = {
+              enable = true;
+
+              virtualHosts."localhost" = {
+                locations."/" = { proxyPass = "http://localhost:3000/"; };
               };
             };
           })

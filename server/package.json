@@ -2,5 +2,7 @@
   "name": "server",
   "version": "HEAD",
   "private": true,
-  "files": [ "main.js" ]
+  "dependencies": {
+    "http-server": "^14.1.1"
+  }
 }

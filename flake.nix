@@ -51,7 +51,14 @@
               enable = true;
 
               virtualHosts."localhost" = {
-                locations."/" = { proxyPass = "http://localhost:3000/"; };
+                locations."/" = {
+                  proxyPass = "http://localhost:3000/";
+                  extraConfig = ''
+                    proxy_set_header Connection \'\';
+                    proxy_http_version 1.1;
+                    chunked_transfer_encoding off;
+                  '';
+                };
               };
             };
           })

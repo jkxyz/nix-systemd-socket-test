@@ -1,0 +1,6 @@
+{
+  "name": "server",
+  "version": "HEAD",
+  "private": true,
+  "files": [ "main.js" ]
+}

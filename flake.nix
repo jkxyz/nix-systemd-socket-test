@@ -38,6 +38,15 @@
               };
             };
 
+            systemd.sockets.server = {
+              listenStreams = [ "127.0.0.1:3000" ];
+              socketConfig = {
+                BindIPv6Only = "both";
+                Service = "server.service";
+              };
+              wantedBy = [ "sockets.target" ];
+            };
+
             services.nginx = {
               enable = true;
 

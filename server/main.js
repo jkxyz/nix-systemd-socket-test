@@ -1,4 +1,5 @@
 const http = require('http');
+const systemdSocketFd = require('./systemd');
 
 const server = http.createServer((req, res) => {
   res.statusCode = 200;
@@ -6,6 +7,6 @@ const server = http.createServer((req, res) => {
   res.end('Hello, world!');
 });
 
-server.listen(3000, '0.0.0.0', () => {
-  console.log('Server listening');
+server.listen(systemdSocketFd(), () => {
+  console.log('Listening on socket');
 });
